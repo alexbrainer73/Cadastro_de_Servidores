@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Home - Cadastro de Servidores{% endblock %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Cadastro de Servidores</h1>
+<ul class="space-y-2">
+    <li><a class="text-blue-500" href="{{ url_for('cadastro') }}">Cadastrar Servidor</a></li>
+    <li><a class="text-blue-500" href="{{ url_for('listagem') }}">Listar Servidores</a></li>
+</ul>
+{% endblock %}
