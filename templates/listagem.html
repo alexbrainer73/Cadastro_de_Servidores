@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Listagem de Servidores{% endblock %}
+{% block content %}
+<h2 class="text-xl font-semibold mb-4">Servidores Cadastrados</h2>
+<table class="min-w-full bg-white">
+    <thead>
+        <tr>
+            <th class="py-2 px-4 border">Nome</th>
+            <th class="py-2 px-4 border">Email</th>
+            <th class="py-2 px-4 border">Telefone</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for servidor in servidores %}
+        <tr>
+            <td class="border px-4 py-2">{{ servidor.nome }}</td>
+            <td class="border px-4 py-2">{{ servidor.email }}</td>
+            <td class="border px-4 py-2">{{ servidor.telefone }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td class="border px-4 py-2" colspan="3">Nenhum servidor cadastrado.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

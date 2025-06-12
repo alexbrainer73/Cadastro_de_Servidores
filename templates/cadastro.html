@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Cadastrar Servidor{% endblock %}
+{% block content %}
+<h2 class="text-xl font-semibold mb-4">Cadastrar Servidor</h2>
+<form class="space-y-4" method="post" action="{{ url_for('cadastro') }}">
+    <div>
+        <label class="block">Nome:</label>
+        <input class="border rounded w-full p-2" type="text" name="nome" required>
+    </div>
+    <div>
+        <label class="block">Email:</label>
+        <input class="border rounded w-full p-2" type="email" name="email" required>
+    </div>
+    <div>
+        <label class="block">Telefone:</label>
+        <input class="border rounded w-full p-2" type="text" name="telefone" required>
+    </div>
+    <button class="bg-blue-500 text-white px-4 py-2 rounded" type="submit">Salvar</button>
+</form>
+{% endblock %}
