@@ -20,3 +20,7 @@ python app.py
 ```
 
 Acesse `http://localhost:5000` para abrir a página inicial, onde você poderá cadastrar e listar servidores e departamentos.
+
+## Organograma
+
+Utilize a rota `/organograma` para visualizar um organograma dinâmico com todos os departamentos e seus respectivos servidores.

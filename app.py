@@ -104,5 +104,29 @@ def listagem_departamentos():
     departamentos = Departamento.query.all()
     return render_template('listagem_departamentos.html', departamentos=departamentos)
 
+
+@app.route('/organograma')
+def organograma():
+    departamentos = Departamento.query.all()
+    servidores = Servidor.query.all()
+
+    nodes = []
+
+    # Add root department
+    nodes.append({'name': config.DEPARTAMENTO_SUPERIOR, 'parent': ''})
+
+    # Add departments
+    for dep in departamentos:
+        if dep.nome == config.DEPARTAMENTO_SUPERIOR:
+            continue
+        parent = dep.departamento_superior if dep.departamento_superior != dep.nome else config.DEPARTAMENTO_SUPERIOR
+        nodes.append({'name': dep.nome, 'parent': parent})
+
+    # Add servers
+    for servidor in servidores:
+        nodes.append({'name': servidor.nome, 'parent': servidor.departamento.nome})
+
+    return render_template('organograma.html', nodes=nodes)
+
 if __name__ == '__main__':
     app.run(debug=True)
