@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}Home - Cadastro de Servidores{% endblock %}
 {% block content %}
-<h1 class="text-2xl font-bold mb-4">Cadastro de Servidores</h1>
-<ul class="space-y-2">
-    <li><a class="text-blue-500" href="{{ url_for('cadastro') }}">Cadastrar Servidor</a></li>
-    <li><a class="text-blue-500" href="{{ url_for('listagem') }}">Listar Servidores</a></li>
-</ul>
+<div class="text-center py-16">
+    <h1 class="text-4xl font-bold mb-4">Bem-vindo ao Cadastro de Servidores</h1>
+    <p class="mb-8 text-lg text-gray-700">Gerencie seus servidores de forma simples e rápida.</p>
+    <div class="space-x-4">
+        <a class="bg-blue-500 text-white px-4 py-2 rounded" href="{{ url_for('cadastro') }}">Cadastrar Servidor</a>
+        <a class="bg-gray-200 px-4 py-2 rounded" href="{{ url_for('listagem') }}">Listar Servidores</a>
+    </div>
+</div>
 {% endblock %}
