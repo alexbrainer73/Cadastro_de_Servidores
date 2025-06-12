@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Listagem de Departamentos{% endblock %}
+{% block content %}
+<h2 class="text-xl font-semibold mb-4">Departamentos Cadastrados</h2>
+<div class="bg-white p-6 rounded shadow">
+<table class="min-w-full">
+    <thead>
+        <tr>
+            <th class="py-2 px-4 border">Nome</th>
+            <th class="py-2 px-4 border">Sigla</th>
+            <th class="py-2 px-4 border">Departamento Superior</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for departamento in departamentos %}
+        <tr>
+            <td class="border px-4 py-2">{{ departamento.nome }}</td>
+            <td class="border px-4 py-2">{{ departamento.sigla }}</td>
+            <td class="border px-4 py-2">{{ departamento.departamento_superior }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td class="border px-4 py-2" colspan="3">Nenhum departamento cadastrado.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

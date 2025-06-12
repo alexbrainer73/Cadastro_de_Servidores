@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 import os
+import config
 
 app = Flask(__name__)
 
@@ -12,11 +13,23 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+
+class Departamento(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(120), nullable=False)
+    sigla = db.Column(db.String(20), nullable=False)
+    departamento_superior = db.Column(db.String(120), nullable=False, default=config.DEPARTAMENTO_SUPERIOR)
+
+    def __repr__(self):
+        return f'<Departamento {self.nome}>'
+
 class Servidor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(120), nullable=False)
     telefone = db.Column(db.String(50), nullable=False)
+    departamento_id = db.Column(db.Integer, db.ForeignKey('departamento.id'), nullable=False)
+    departamento = db.relationship('Departamento', backref=db.backref('servidores', lazy=True))
 
     def __repr__(self):
         return f'<Servidor {self.nome}>'
@@ -32,20 +45,42 @@ def index():
 
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
+    departamentos = Departamento.query.all()
     if request.method == 'POST':
         nome = request.form['nome']
         email = request.form['email']
         telefone = request.form['telefone']
-        servidor = Servidor(nome=nome, email=email, telefone=telefone)
+        departamento_id = request.form['departamento_id']
+        servidor = Servidor(nome=nome, email=email, telefone=telefone, departamento_id=departamento_id)
         db.session.add(servidor)
         db.session.commit()
         return redirect(url_for('listagem'))
-    return render_template('cadastro.html')
+    return render_template('cadastro.html', departamentos=departamentos)
 
 @app.route('/listagem')
 def listagem():
     servidores = Servidor.query.all()
     return render_template('listagem.html', servidores=servidores)
+
+
+@app.route('/cadastro_departamento', methods=['GET', 'POST'])
+def cadastro_departamento():
+    if request.method == 'POST':
+        nome = request.form['nome']
+        sigla = request.form['sigla']
+        departamento = Departamento(nome=nome, sigla=sigla,
+                                    departamento_superior=config.DEPARTAMENTO_SUPERIOR)
+        db.session.add(departamento)
+        db.session.commit()
+        return redirect(url_for('listagem_departamentos'))
+    return render_template('cadastro_departamento.html',
+                           departamento_superior=config.DEPARTAMENTO_SUPERIOR)
+
+
+@app.route('/listagem_departamentos')
+def listagem_departamentos():
+    departamentos = Departamento.query.all()
+    return render_template('listagem_departamentos.html', departamentos=departamentos)
 
 if __name__ == '__main__':
     app.run(debug=True)
