@@ -50,7 +50,9 @@ with app.app_context():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    num_servers = Servidor.query.count()
+    num_departments = Departamento.query.count()
+    return render_template('index.html', num_servers=num_servers, num_departments=num_departments)
 
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
