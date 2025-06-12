@@ -37,6 +37,15 @@ class Servidor(db.Model):
 # cria o banco de dados se ele ainda não existir
 with app.app_context():
     db.create_all()
+    # garante que o departamento raiz esteja presente no banco de dados
+    if not Departamento.query.filter_by(nome=config.DEPARTAMENTO_SUPERIOR).first():
+        root_dep = Departamento(
+            nome=config.DEPARTAMENTO_SUPERIOR,
+            sigla=config.DEPARTAMENTO_SUPERIOR,
+            departamento_superior=config.DEPARTAMENTO_SUPERIOR,
+        )
+        db.session.add(root_dep)
+        db.session.commit()
 
 
 @app.route('/')
@@ -65,16 +74,29 @@ def listagem():
 
 @app.route('/cadastro_departamento', methods=['GET', 'POST'])
 def cadastro_departamento():
+    departamentos = Departamento.query.filter(Departamento.nome != config.DEPARTAMENTO_SUPERIOR).all()
     if request.method == 'POST':
         nome = request.form['nome']
         sigla = request.form['sigla']
-        departamento = Departamento(nome=nome, sigla=sigla,
-                                    departamento_superior=config.DEPARTAMENTO_SUPERIOR)
+        superior_id = request.form['departamento_superior_id']
+        if superior_id == 'root':
+            departamento_superior = config.DEPARTAMENTO_SUPERIOR
+        else:
+            superior = Departamento.query.get(int(superior_id))
+            departamento_superior = superior.nome if superior else config.DEPARTAMENTO_SUPERIOR
+        departamento = Departamento(
+            nome=nome,
+            sigla=sigla,
+            departamento_superior=departamento_superior,
+        )
         db.session.add(departamento)
         db.session.commit()
         return redirect(url_for('listagem_departamentos'))
-    return render_template('cadastro_departamento.html',
-                           departamento_superior=config.DEPARTAMENTO_SUPERIOR)
+    return render_template(
+        'cadastro_departamento.html',
+        departamentos=departamentos,
+        departamento_superior=config.DEPARTAMENTO_SUPERIOR,
+    )
 
 
 @app.route('/listagem_departamentos')
