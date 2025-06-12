@@ -1,59 +1,59 @@
 {% extends 'base.html' %}
-{% block title %}Home - Server Management{% endblock %}
+{% block title %}Home - Cadastro de Servidores{% endblock %}
 {% block content %}
 <div class="text-center py-16 px-4">
-    <h1 class="text-5xl font-bold mb-6 text-gray-800">Welcome to Server Management</h1>
-    <p class="mb-12 text-xl text-gray-600">Manage your servers and departments quickly and easily.</p>
+    <h1 class="text-5xl font-bold mb-6 text-gray-800">Bem-vindo ao Cadastro de Servidores</h1>
+    <p class="mb-12 text-xl text-gray-600">Gerencie seus servidores e departamentos de forma simples e rápida.</p>
 
     <div class="bg-gray-100 p-8 rounded-lg shadow-md mb-16 max-w-2xl mx-auto">
-        <h2 class="text-3xl font-semibold mb-6 text-center text-gray-700">System Statistics</h2>
+        <h2 class="text-3xl font-semibold mb-6 text-center text-gray-700">Estatísticas do Sistema</h2>
         <div class="flex justify-around">
             <div class="text-center">
                 <p class="text-5xl font-bold text-blue-600">{{ num_servers }}</p>
-                <p class="text-xl text-gray-700 mt-2">Registered Servers</p>
+                <p class="text-xl text-gray-700 mt-2">Servidores Cadastrados</p>
             </div>
             <div class="text-center">
                 <p class="text-5xl font-bold text-green-600">{{ num_departments }}</p>
-                <p class="text-xl text-gray-700 mt-2">Registered Departments</p>
+                <p class="text-xl text-gray-700 mt-2">Departamentos Registrados</p>
             </div>
         </div>
     </div>
 
     <div class="flex flex-wrap justify-center gap-8">
-        <!-- Card 1: Register New Server -->
+        <!-- Card 1: Cadastrar Novo Servidor -->
         <div class="bg-white shadow-lg rounded-lg p-6 w-72 text-center flex flex-col justify-between hover:shadow-xl transition-shadow duration-300">
             <div>
-                <h2 class="text-2xl font-semibold mb-3 text-gray-700">Register New Server</h2>
-                <p class="text-gray-600 mb-4">Add a new server to the system.</p>
+                <h2 class="text-2xl font-semibold mb-3 text-gray-700">Cadastrar Novo Servidor</h2>
+                <p class="text-gray-600 mb-4">Adicione um novo servidor ao sistema.</p>
             </div>
-            <a href="{{ url_for('cadastro') }}" class="mt-auto bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-300 font-medium">Register Server</a>
+            <a href="{{ url_for('cadastro') }}" class="mt-auto bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-300 font-medium">Cadastrar Servidor</a>
         </div>
 
-        <!-- Card 2: View All Servers -->
+        <!-- Card 2: Listar Servidores -->
         <div class="bg-white shadow-lg rounded-lg p-6 w-72 text-center flex flex-col justify-between hover:shadow-xl transition-shadow duration-300">
             <div>
-                <h2 class="text-2xl font-semibold mb-3 text-gray-700">View All Servers</h2>
-                <p class="text-gray-600 mb-4">Browse and manage existing servers.</p>
+                <h2 class="text-2xl font-semibold mb-3 text-gray-700">Listar Servidores</h2>
+                <p class="text-gray-600 mb-4">Visualize e gerencie os servidores cadastrados.</p>
             </div>
-            <a href="{{ url_for('listagem') }}" class="mt-auto bg-gray-300 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-400 transition-colors duration-300 font-medium">View Servers</a>
+            <a href="{{ url_for('listagem') }}" class="mt-auto bg-gray-300 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-400 transition-colors duration-300 font-medium">Listar Servidores</a>
         </div>
 
-        <!-- Card 3: Register New Department -->
+        <!-- Card 3: Cadastrar Novo Departamento -->
         <div class="bg-white shadow-lg rounded-lg p-6 w-72 text-center flex flex-col justify-between hover:shadow-xl transition-shadow duration-300">
             <div>
-                <h2 class="text-2xl font-semibold mb-3 text-gray-700">Register New Department</h2>
-                <p class="text-gray-600 mb-4">Add a new department to the system.</p>
+                <h2 class="text-2xl font-semibold mb-3 text-gray-700">Cadastrar Novo Departamento</h2>
+                <p class="text-gray-600 mb-4">Adicione um novo departamento ao sistema.</p>
             </div>
-            <a href="{{ url_for('cadastro_departamento') }}" class="mt-auto bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors duration-300 font-medium">Register Department</a>
+            <a href="{{ url_for('cadastro_departamento') }}" class="mt-auto bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors duration-300 font-medium">Cadastrar Departamento</a>
         </div>
 
-        <!-- Card 4: View All Departments -->
+        <!-- Card 4: Listar Departamentos -->
         <div class="bg-white shadow-lg rounded-lg p-6 w-72 text-center flex flex-col justify-between hover:shadow-xl transition-shadow duration-300">
             <div>
-                <h2 class="text-2xl font-semibold mb-3 text-gray-700">View All Departments</h2>
-                <p class="text-gray-600 mb-4">Browse and manage existing departments.</p>
+                <h2 class="text-2xl font-semibold mb-3 text-gray-700">Listar Departamentos</h2>
+                <p class="text-gray-600 mb-4">Visualize e gerencie os departamentos cadastrados.</p>
             </div>
-            <a href="{{ url_for('listagem_departamentos') }}" class="mt-auto bg-gray-300 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-400 transition-colors duration-300 font-medium">View Departments</a>
+            <a href="{{ url_for('listagem_departamentos') }}" class="mt-auto bg-gray-300 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-400 transition-colors duration-300 font-medium">Listar Departamentos</a>
         </div>
     </div>
 </div>
