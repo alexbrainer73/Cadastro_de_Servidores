@@ -9,6 +9,7 @@
             <th class="py-2 px-4 border">Nome</th>
             <th class="py-2 px-4 border">Email</th>
             <th class="py-2 px-4 border">Telefone</th>
+            <th class="py-2 px-4 border">Departamento</th>
         </tr>
     </thead>
     <tbody>
@@ -17,10 +18,11 @@
             <td class="border px-4 py-2">{{ servidor.nome }}</td>
             <td class="border px-4 py-2">{{ servidor.email }}</td>
             <td class="border px-4 py-2">{{ servidor.telefone }}</td>
+            <td class="border px-4 py-2">{{ servidor.departamento.nome }}</td>
         </tr>
         {% else %}
         <tr>
-            <td class="border px-4 py-2" colspan="3">Nenhum servidor cadastrado.</td>
+            <td class="border px-4 py-2" colspan="4">Nenhum servidor cadastrado.</td>
         </tr>
         {% endfor %}
     </tbody>

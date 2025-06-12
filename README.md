@@ -1,6 +1,6 @@
 # Cadastro de Servidores
 
-Aplicação web simples para cadastro e listagem de servidores utilizando Flask e SQLite.
+Aplicação web simples para cadastro e listagem de servidores e departamentos utilizando Flask e SQLite. O nome do departamento superior é configurado em `config.py` (valor padrão `TCE-PE`).
 
 ## Requisitos
 
@@ -19,4 +19,4 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Acesse `http://localhost:5000` para abrir a página inicial, onde você poderá cadastrar e listar servidores.
+Acesse `http://localhost:5000` para abrir a página inicial, onde você poderá cadastrar e listar servidores e departamentos.
